@@ -1,11 +1,4 @@
-FROM node:18-alpine
-WORKDIR /app
-
-COPY ..
-
-RUN npm install
-
-RUN npm run build
-
-EXPOSE 8081
-CMD ["npm", "run", "ser
+FROM openjdk:11-jdk
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
